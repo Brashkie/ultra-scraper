@@ -64,6 +64,7 @@
 ---
 
 ## 📦 Instalación
+
 ```bash
 npm install ultra-scraper
 ```
@@ -77,7 +78,8 @@ npm install ultra-scraper
 ## 🧪 Uso básico
 
 ### Scraping simple
-```javascript
+
+```typescript
 import { createScraper } from "ultra-scraper";
 
 const scraper = createScraper();
@@ -91,7 +93,8 @@ console.log(data.headers);  // Headers de la respuesta
 ```
 
 ### Scraping con selectores
-```javascript
+
+```typescript
 import { createScraper } from "ultra-scraper";
 
 const scraper = createScraper();
@@ -114,7 +117,8 @@ links.each((i, elem) => {
 ### Scraping dinámico
 
 Para sitios web que cargan contenido con JavaScript:
-```javascript
+
+```typescript
 import { createScraper } from "ultra-scraper";
 
 const scraper = createScraper({
@@ -129,7 +133,8 @@ console.log($.text());
 ```
 
 ### Configuración de opciones
-```javascript
+
+```typescript
 const scraper = createScraper({
   // Navegación
   dynamic: false,           // Usar navegador headless
@@ -152,7 +157,8 @@ const scraper = createScraper({
 ```
 
 ### Extracción estructurada
-```javascript
+
+```typescript
 const scraper = createScraper();
 
 const products = await scraper.extract("https://shop.com/products", {
@@ -179,7 +185,8 @@ console.log(products);
 Ultra Scraper incluye un sistema de plugins extensible para añadir funcionalidades personalizadas.
 
 ### Rotación de proxys
-```javascript
+
+```typescript
 import { createScraper, useProxyRotation } from "ultra-scraper";
 
 const scraper = createScraper();
@@ -195,7 +202,8 @@ await scraper.get("https://example.com");
 ```
 
 ### User-Agent aleatorio
-```javascript
+
+```typescript
 import { createScraper, useRandomUserAgent } from "ultra-scraper";
 
 const scraper = createScraper();
@@ -205,7 +213,8 @@ await scraper.get("https://example.com");
 ```
 
 ### Rate limiting
-```javascript
+
+```typescript
 import { createScraper, useRateLimit } from "ultra-scraper";
 
 const scraper = createScraper();
@@ -217,7 +226,8 @@ await scraper.get("https://example.com");
 ```
 
 ### Crear plugin personalizado
-```javascript
+
+```typescript
 const myPlugin = (scraper) => {
   scraper.on("beforeRequest", (config) => {
     console.log(`Scraping: ${config.url}`);
@@ -235,49 +245,18 @@ scraper.use(myPlugin);
 
 ## 📚 Ejemplos
 
-### Scraping de noticias
-```javascript
-import { createScraper } from "ultra-scraper";
+Consulta la carpeta `examples/` para ver más casos de uso:
 
-const scraper = createScraper();
-
-const news = await scraper.extract("https://news-site.com", {
-  selector: "article",
-  fields: {
-    headline: { selector: "h2", attr: "text" },
-    author: { selector: ".author", attr: "text" },
-    date: { selector: "time", attr: "datetime" },
-    summary: { selector: ".summary", attr: "text" }
-  }
-});
-
-console.log(news);
-```
-
-### Scraping con autenticación
-```javascript
-const scraper = createScraper({
-  headers: {
-    "Authorization": "Bearer YOUR_TOKEN",
-    "Cookie": "session=abc123"
-  }
-});
-
-const data = await scraper.get("https://protected-site.com/dashboard");
-```
-
-### Scraping de imágenes
-```javascript
-const images = await scraper.query("https://gallery.com", "img");
-const imageUrls = images.map((i, elem) => scraper.$(elem).attr("src")).get();
-
-console.log(imageUrls);
-```
+- [`basic.ts`](examples/basic.ts) - Uso básico del scraper
+- [`with-plugins.ts`](examples/with-plugins.ts) - Uso con plugins
+- [`structured-extraction.ts`](examples/structured-extraction.ts) - Extracción estructurada
+- [`dynamic-scraping.ts`](examples/dynamic-scraping.ts) - Scraping dinámico
 
 ---
 
 ## 🛡️ Manejo de errores
-```javascript
+
+```typescript
 import { createScraper, ScraperError } from "ultra-scraper";
 
 const scraper = createScraper({ retries: 3 });
@@ -321,7 +300,7 @@ Obtiene el contenido de una URL.
 
 Extrae elementos usando selectores CSS.
 
-**Retorna:** `Promise<CheerioStatic>`
+**Retorna:** `Promise<CheerioAPI>`
 
 ### `scraper.extract(url, schema, options?)`
 
@@ -332,6 +311,21 @@ Extrae datos estructurados según un esquema.
 ### `scraper.use(plugin)`
 
 Registra un plugin.
+
+---
+
+## 🧪 Testing
+
+```bash
+# Ejecutar tests
+npm test
+
+# Tests en modo watch
+npm run test:watch
+
+# Cobertura de código
+npm run test:coverage
+```
 
 ---
 
