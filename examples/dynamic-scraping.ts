@@ -16,9 +16,9 @@ async function main() {
     console.log('🌐 Scraping dynamic content with headless browser...\n');
 
     // Ejemplo 1: Sitio con contenido cargado por JavaScript
-    console.log('📍 Example 1: HTTP Bin (dynamic headers)\n');
-    const data = await scraper.get('https://httpbin.org/html', {
-      waitForSelector: 'body',
+    console.log('📍 Example 1: Dynamic content loading\n');
+    const data = await scraper.get('http://quotes.toscrape.com/js/', {
+      waitForSelector: '.quote',
     });
 
     console.log(`Status: ${data.status}`);
@@ -26,20 +26,27 @@ async function main() {
     console.log(`Content loaded: ${data.html.length} bytes\n`);
 
     // Ejemplo 2: Extraer contenido dinámico
-    console.log('📍 Example 2: Extracting dynamic content\n');
+    console.log('📍 Example 2: Extracting dynamic quotes\n');
 
-    const $ = await scraper.query('https://httpbin.org/html', 'h1');
-    console.log(`Title found: ${$.text()}\n`);
-
-    // Ejemplo 3: Esperar por selector específico
-    console.log('📍 Example 3: Waiting for specific selector\n');
-    const dynamicContent = await scraper.get('https://httpbin.org/delay/2', {
-      dynamic: true,
-      waitTime: 3000,
+    const quotes = await scraper.extract('http://quotes.toscrape.com/js/', {
+      selector: '.quote',
+      limit: 3,
+      fields: {
+        text: {
+          selector: '.text',
+          attr: 'text',
+        },
+        author: {
+          selector: '.author',
+          attr: 'text',
+        },
+      },
     });
 
-    console.log(`✅ Dynamic content loaded successfully`);
-    console.log(`Response time: ${dynamicContent.responseTime}ms\n`);
+    quotes.forEach((quote, i) => {
+      console.log(`${i + 1}. "${quote.text}"`);
+      console.log(`   - ${quote.author}\n`);
+    });
 
     console.log('💡 Tips for dynamic scraping:');
     console.log('  - Use waitForSelector for elements loaded by JS');
@@ -47,7 +54,9 @@ async function main() {
     console.log('  - Use waitTime for additional load time');
     console.log('  - Dynamic mode is slower but more reliable\n');
   } catch (error) {
-    console.error('❌ Error:', error.message);
+    if (error instanceof Error) {
+      console.error('❌ Error:', error.message);
+    }
   } finally {
     await scraper.close();
   }
