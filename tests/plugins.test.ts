@@ -1,10 +1,9 @@
-
 import { useProxyRotation, useRandomUserAgent, useRateLimit } from '../src/plugins';
 import { RequestConfig } from '../src/types';
 
 describe('Plugins', () => {
   describe('ProxyRotation', () => {
-    it('should rotate through proxies', () => {
+    it('should rotate through proxies', async () => {
       const proxies = ['proxy1:8080', 'proxy2:8080', 'proxy3:8080'];
       const plugin = useProxyRotation(proxies);
 
@@ -12,16 +11,16 @@ describe('Plugins', () => {
         url: 'https://example.com',
       };
 
-      const result1 = plugin.beforeRequest!(config);
+      const result1 = await Promise.resolve(plugin.beforeRequest!(config));
       expect(result1.proxy).toBe('proxy1:8080');
 
-      const result2 = plugin.beforeRequest!(config);
+      const result2 = await Promise.resolve(plugin.beforeRequest!(config));
       expect(result2.proxy).toBe('proxy2:8080');
 
-      const result3 = plugin.beforeRequest!(config);
+      const result3 = await Promise.resolve(plugin.beforeRequest!(config));
       expect(result3.proxy).toBe('proxy3:8080');
 
-      const result4 = plugin.beforeRequest!(config);
+      const result4 = await Promise.resolve(plugin.beforeRequest!(config));
       expect(result4.proxy).toBe('proxy1:8080'); // Should rotate back
     });
 
@@ -31,21 +30,21 @@ describe('Plugins', () => {
   });
 
   describe('RandomUserAgent', () => {
-    it('should add random user agent to request', () => {
+    it('should add random user agent to request', async () => {
       const plugin = useRandomUserAgent();
 
       const config: RequestConfig = {
         url: 'https://example.com',
       };
 
-      const result = plugin.beforeRequest!(config);
+      const result = await Promise.resolve(plugin.beforeRequest!(config));
 
       expect(result.headers).toBeDefined();
       expect(result.headers!['User-Agent']).toBeDefined();
       expect(typeof result.headers!['User-Agent']).toBe('string');
     });
 
-    it('should preserve existing headers', () => {
+    it('should preserve existing headers', async () => {
       const plugin = useRandomUserAgent();
 
       const config: RequestConfig = {
@@ -55,7 +54,7 @@ describe('Plugins', () => {
         },
       };
 
-      const result = plugin.beforeRequest!(config);
+      const result = await Promise.resolve(plugin.beforeRequest!(config));
 
       expect(result.headers!['X-Custom']).toBe('value');
       expect(result.headers!['User-Agent']).toBeDefined();
