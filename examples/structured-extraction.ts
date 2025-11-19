@@ -18,16 +18,15 @@ async function main() {
         text: {
           selector: '.text',
           attr: 'text',
-          transform: (value) => value.replace(/[""]/g, ''),
+          transform: (value: string) => value.replace(/[""]/g, ''),
         },
         author: {
           selector: '.author',
           attr: 'text',
         },
         tags: {
-          selector: '.tags .tag',
+          selector: '.tag',
           attr: 'text',
-          transform: (value) => value.split(',').map((tag) => tag.trim()),
         },
       },
     });
@@ -36,10 +35,10 @@ async function main() {
     quotes.forEach((quote, index) => {
       console.log(`${index + 1}. "${quote.text}"`);
       console.log(`   - Author: ${quote.author}`);
-      console.log(`   - Tags: ${quote.tags}\n`);
+      console.log(`   - Tag: ${quote.tags || 'N/A'}\n`);
     });
 
-    // Ejemplo 2: Extraer productos (simulado)
+    // Ejemplo 2: Esquema para productos de e-commerce
     console.log('🔍 Example schema for e-commerce products:\n');
 
     const productSchema = {
@@ -74,7 +73,9 @@ async function main() {
     console.log('Schema definition:');
     console.log(JSON.stringify(productSchema, null, 2));
   } catch (error) {
-    console.error('❌ Error:', error.message);
+    if (error instanceof Error) {
+      console.error('❌ Error:', error.message);
+    }
   } finally {
     await scraper.close();
   }
