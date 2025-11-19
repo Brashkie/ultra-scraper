@@ -29,15 +29,16 @@ async function main() {
   });
 
   scraper.on('error', (error) => {
-    console.error(`❌ Error: ${error.message}`);
+    if (error instanceof Error) {
+      console.error(`❌ Error: ${error.message}`);
+    }
   });
 
   try {
     // Hacer múltiples peticiones
     const urls = [
-      'https://example.com',
-      'https://httpbin.org/html',
-      'https://httpbin.org/delay/1',
+      'http://quotes.toscrape.com/',
+      'http://quotes.toscrape.com/page/2/',
     ];
 
     console.log('🚀 Starting scraping with plugins...\n');
@@ -49,7 +50,9 @@ async function main() {
 
     console.log('✨ All requests completed!');
   } catch (error) {
-    console.error('❌ Error:', error.message);
+    if (error instanceof Error) {
+      console.error('❌ Error:', error.message);
+    }
   } finally {
     await scraper.close();
   }
