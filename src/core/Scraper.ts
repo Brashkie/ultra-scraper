@@ -140,7 +140,7 @@ export class Scraper implements IScraper {
     const results: any[] = [];
     const elements = $(schema.selector);
 
-    elements.each((index, element) => {
+    elements.each((_index, element): void | false => {
       if (schema.limit && results.length >= schema.limit) {
         return false; // Break the loop
       }
