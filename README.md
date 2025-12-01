@@ -945,7 +945,7 @@ try {
 
 ## 📝 Changelog
 
-### v1.1.0 (2025-01-02) - MAJOR UPDATE
+### v1.1.0 (2025-12-01) - MAJOR UPDATE
 
 #### 🎉 Nuevas Características
 - ✅ Browser Pool System con auto-scaling
@@ -969,7 +969,7 @@ try {
 - Memory leaks
 - Race conditions
 
-### v1.0.3 (2024-12-15)
+### v1.0.0 (2025-11-20)
 - Primera versión estable
 
 ---
