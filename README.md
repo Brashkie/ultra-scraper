@@ -1009,7 +1009,7 @@ npm test
 
 ## 📄 Licencia
 
-MIT License - ver [LICENSE](LICENSE)
+Apache-2.0 License - ver [LICENSE](LICENSE)
 
 Copyright © 2025 [Hepein Oficial](https://github.com/Brashkie)
 
