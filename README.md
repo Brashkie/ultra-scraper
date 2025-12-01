@@ -83,17 +83,14 @@
 
 ## 📦 Instalación
 ```bash
+# Todo en uno
 npm install ultra-scraper
-```
 
-### Dependencias Peer
-```bash
-# Para scraping dinámico (opcional)
-npm install playwright
-
-# Auto-instalación de navegadores
+# Instalar navegadores de Playwright (requerido para scraping dinámico)
 npx playwright install chromium
 ```
+
+**Nota:** Si solo usarás scraping HTTP (sin JavaScript), puedes omitir la instalación de navegadores.
 
 ---
 
