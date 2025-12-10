@@ -1,0 +1,131 @@
+# ============================================
+# SOURCE FILES (No publicar código fuente)
+# ============================================
+src/
+*.ts
+!*.d.ts
+
+# ============================================
+# TESTS (No publicar tests)
+# ============================================
+tests/
+__tests__/
+coverage/
+*.test.ts
+*.test.js
+*.spec.ts
+*.spec.js
+.nyc_output/
+
+# ============================================
+# EXAMPLES (OPCIONAL - Descomentar para incluir)
+# ============================================
+# examples/
+
+# ============================================
+# DOCS (Publicar solo README y CHANGELOG)
+# ============================================
+docs/
+*.md
+!README.md
+!CHANGELOG.md
+!LICENSE.md
+!LICENSE
+
+# ============================================
+# CONFIG FILES (No publicar configs)
+# ============================================
+tsconfig.json
+tsconfig.test.json
+jest.config.js
+.eslintrc.json
+.eslintrc.js
+.prettierrc
+.prettierrc.json
+.editorconfig
+nodemon.json
+.npmrc
+
+# ============================================
+# BUILD SCRIPTS
+# ============================================
+scripts/
+*.ps1
+*.sh
+
+# ============================================
+# GIT
+# ============================================
+.git/
+.gitignore
+.gitattributes
+.github/
+
+# ============================================
+# CI/CD
+# ============================================
+.travis.yml
+.gitlab-ci.yml
+.circleci/
+azure-pipelines.yml
+.github/workflows/
+
+# ============================================
+# IDE
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ============================================
+# NPM
+# ============================================
+.npmignore
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# ============================================
+# PACKAGE MANAGER
+# ============================================
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ============================================
+# TEMP & CACHE
+# ============================================
+*.log
+*.tmp
+.cache/
+.temp/
+tmp/
+temp/
+
+# ============================================
+# OS
+# ============================================
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# ============================================
+# MISC
+# ============================================
+*.bak
+*.swp
+.env
+.env.local
+.env.*.local
+
+# ============================================
+# PLAYWRIGHT
+# ============================================
+playwright-report/
+test-results/
